@@ -1,0 +1,13 @@
+<font color='#FFFF00'>这是颜色内容</font>
+
+<font color='#32CD32'>这是颜色内容</font>
+
+<font color='#FF0000'>这是颜色内容</font>
+
+<font face="楷体"size=6>我是微软雅黑</font>
+
+<font face="楷体"size=4 >我是微软雅黑</font>
+
+
+RGB颜色查询对照表
+https://www.114la.com/other/rgb.htm

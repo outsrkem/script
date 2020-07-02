@@ -1,0 +1,24 @@
+{
+    // 禁止更新
+    "update_check": false,
+    
+    "color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+    "font_size": 15,
+    "tab_size": 4,
+    "theme": "Adaptive.sublime-theme",
+    // 设置tab为4个空格
+    "translate_tabs_to_spaces": true,
+    // 设置不记住上次打开的文件
+    "hot_exit": false,
+    "remember_open_files": false,
+    // 设置字体
+    "font_options": ["gdi"],
+    "theme_font_options": ["gdi"],
+    "dpi_scale": 1.0,
+    // "font_face": "YaHei Consolas Hybrid",
+    // "font_face": "Inconsolata",
+    "font_face": "Droid Sans Mono",
+    "font_size": 12,
+    //记住上次打开的文件
+    "hot_exit": true
+}
