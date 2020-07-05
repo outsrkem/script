@@ -1,0 +1,17 @@
+/usr/local/nginx/logs/*.log {
+    daily
+    missingok
+    rotate 14
+    compress
+    delaycompress
+    dateext
+    notifempty
+    create 0600 nginx nginx
+    sharedscripts
+    postrotate
+        if [ -f /usr/local/nginx/logs/nginx.pid ]; then
+              /usr/bin/kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+              /usr/bin/chmod 400 /usr/local/nginx/logs/*.gz
+        fi
+    endscript
+}
