@@ -64,6 +64,8 @@ selinux  对 logrotate有很大的影响。 selinux  设置不合适会导致轮
 
 #### Resolution
 
+参考文档：https://access.redhat.com/solutions/39006
+
 - To get rid of the message `ALERT exited abnormally with [1]`, check if logrotate is being used to rotate logs other than those in `/var/log`. If so, then SELinux can be the cause of this issue. The directories outside of `/var/log` should have the same context as `/var/log` has. Set the following SELinux context on the directories where logrotate should rotate the logs.
 
 Example: logrotate has been configured to rotate files in `/backup/mysql`
