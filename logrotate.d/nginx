@@ -1,11 +1,15 @@
-/usr/local/nginx/logs/*.log {
+/usr/local/nginx/logs/access.log
+/usr/local/nginx/logs/error.log
+{
     daily
+    minsize 5K
+    maxsize 10M
     missingok
     rotate 14
     compress
     delaycompress
     dateext
-    dateformat -%Y%m%d.%s
+    dateformat -%Y%m%d-%s
     notifempty
     create 0600 nginx nginx
     sharedscripts
@@ -16,3 +20,4 @@
         fi
     endscript
 }
+
