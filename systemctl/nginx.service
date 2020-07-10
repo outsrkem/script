@@ -1,0 +1,18 @@
+NGINXDIR=/usr/local/nginx
+
+cat << EOF > /usr/lib/systemd/system/nginx.service 
+[Unit]
+Description=nginx - high performance web server
+Documentation=http://nginx.org/en/docs/
+After=network.target remote-fs.target nss-lookup.target
+[Service]
+Type=forking
+User=nginx
+Group=nginx
+ExecStartPre=$NGINXDIR/sbin/nginx -t
+ExecStart=$NGINXDIR/sbin/nginx
+ExecReload=$NGINXDIR/sbin/nginx -s reload
+ExecStop=$NGINXDIR/sbin/nginx -s stop
+[Install]
+WantedBy=multi-user.target
+EOF

@@ -1,0 +1,17 @@
+#!/bin/bash
+# harbor启动脚本放在/root/harbor/目录下
+SHHOME=$(cd `dirname $0`; pwd)
+cd $SHHOME
+/usr/sbin/docker-compose up -d
+
+
+cat << EOF > /usr/lib/systemd/system/harbor.service
+[Unit]
+Description=harbor service
+After=docker.target
+[Service]
+Type=forking
+ExecStart=/root/harbor/start.sh
+[Install]
+WantedBy=multi-user.target
+EOF

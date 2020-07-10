@@ -1,0 +1,27 @@
+TOMCATDIR=/home/apache-tomcat-7.0.69
+JAVA_HOMEDIR=/home/jdk1.8.0_101
+JENKINS_HOME=/home/jenkins
+
+cat << EOF > /usr/lib/systemd/system/tomcat.service
+[Unit]
+Description=tomcat
+After=syslog.target network.target remote-fs.target nss-lookup.target
+[Service]
+Type=forking
+Environment=JAVA_HOME=$JAVA_HOMEDIR
+Environment=JENKINS_HOME=$JENKINS_HOME
+PIDFile=$TOMCATDIR/tomcat.pid
+ExecStart=$TOMCATDIR/bin/startup.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target
+EOF
+
+首先，需要为tomcat配置pid。
+vim bin/catalina.sh
+# Copy CATALINA_BASE from CATALINA_HOME if not already set
+[ -z "$CATALINA_BASE" ] && CATALINA_BASE="$CATALINA_HOME"
+# 设置pid。一定要加在CATALINA_BASE定义后面，要不然pid会生成到/下面
+CATALINA_PID="$CATALINA_BASE/tomcat.pid"

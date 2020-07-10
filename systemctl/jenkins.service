@@ -1,0 +1,26 @@
+#!/bin/bash
+# Tue Dec  3 CST 2019
+# The script must use a PID file.
+# AppName must be filtered by grep to.
+# 
+SHHOME=$(cd `dirname $0`; pwd)
+export JAVA_HOME=/usr/local/jdk1.8.0_101
+export PATH=$JAVA_HOME/bin:$PATH
+export JENKINS_HOME=/home/jenkins/data
+PidFile=$SHHOME/pid
+cd $SHHOME
+exec java -jar jenkins.war --httpPort=80 &>> ./jenkins.log &
+echo $! > $PidFile
+
+
+
+cat /usr/lib/systemd/system/jenkins.service 
+[Unit]
+Description=jenkins.service 
+Documentation=jenkins.service 
+After=network.target
+[Service]
+Type=forking
+ExecStart=/home/jenkins/start.sh
+[Install]
+WantedBy=multi-user.target
