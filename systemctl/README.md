@@ -224,7 +224,7 @@ WantedBy=multi-user.target
      </tr>      
   </table>
   
-- **[Install] ** 定义如何安装这个配置文件，即怎样做到开机启动。
+- **[Install] **  定义如何安装这个配置文件，即怎样做到开机启动。
   
   <table>
       <tr>

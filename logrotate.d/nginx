@@ -11,12 +11,12 @@
     dateext
     dateformat -%Y%m%d-%s
     notifempty
-    create 0600 nginx nginx
+    create 0640 nginx nginx
     sharedscripts
     postrotate
         if [ -f /usr/local/nginx/logs/nginx.pid ]; then
               /usr/bin/kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
-              /usr/bin/chmod 400 /usr/local/nginx/logs/*.log-*
+              /usr/bin/chmod 440 /usr/local/nginx/logs/*.log-*
         fi
     endscript
 }
