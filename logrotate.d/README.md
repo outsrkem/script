@@ -59,34 +59,34 @@ logrotate -vf /etc/logrotate.conf
 
 #### 特殊说明
 
-selinux  对 logrotate有很大的影响。 selinux  设置不合适会导致轮替失败。
-
-#### Resolution
-
 参考文档：https://access.redhat.com/solutions/39006
 
-- To get rid of the message `ALERT exited abnormally with [1]`, check if logrotate is being used to rotate logs other than those in `/var/log`. If so, then SELinux can be the cause of this issue. The directories outside of `/var/log` should have the same context as `/var/log` has. Set the following SELinux context on the directories where logrotate should rotate the logs.
+查看系统规则库，可以看到Nginx的日志目录应具有 system_u:object_r:httpd_log_t:s0  上下文，如下：
 
-Example: logrotate has been configured to rotate files in `/backup/mysql`
+```
+# semanage fcontext -l |grep nginx
+/var/log/nginx(/.*)?          all files          system_u:object_r:httpd_log_t:s0
+```
 
-- Run the following command:
+我们可以直接将标签加到selinux的安全策略库中：
 
-  ```
-  # semanage fcontext -a -t var_log_t '/backup/mysql(/.*)?'
-  ```
+```
+# semanage fcontext -a -t httpd_log_t '/usr/local/nginx/logs(/.*)?'
+```
 
-  The above command will define the context that would be automatically set on new files under `/backup/mysql`. This definition will be stored in `/etc/selinux/targeted/contexts/files/file_contexts.local`, so that the changes will be persistent. This can be verified by looking into the file:
+根据新定义，运行以下命令递归设置logs上下文，该命令要求启用selinux才能使用
 
-- Run the following command to recursively set the context for files under `/backup/mysql` according to the newly defined definition:
+```
+# restorecon -Frvv /usr/local/nginx/logs
+```
 
-  ```
-  # restorecon -Frvv /backup/mysql
-  restorecon reset /backup/mysql context system_u:object_r:default_t:s0->system_u:object_r:var_log_t:s0
-  restorecon reset /backup/mysql/backup.tar context system_u:object_r:default_t:s0->system_u:object_r:var_log_t:s0
-  # 
-  ```
+If SELinux is not in the Enforcing mode, this solution does not apply. Please, refer to [this article](https://access.redhat.com/site/solutions/32831) in order to get more information on logrotate troubleshooting.
 
-  If SELinux is not in the Enforcing mode, this solution does not apply. Please, refer to [this article](https://access.redhat.com/site/solutions/32831) in order to get more information on logrotate troubleshooting.
+或者手动设置/usr/local/nginx/logs目录的上下文：
+
+```
+# chcon -R -t httpd_log_t  /usr/local/nginx/logs
+```
 
 #### Diagnostic Steps
 
@@ -115,7 +115,7 @@ Example: logrotate has been configured to rotate files in `/backup/mysql`
   chcon [-R] [-t type] [-u user] [-r role] 文件
       选项与参数：
       -R ：连同该目录下的次目录也同时修改;
-      -t ：后面接安全性本文的类型字段!
+      -t ：后面接安全性本文的类型字段，例如 var_log_t;
       -u ：后面接身份识别，例如 system_u;
       -r ：后面接角色，例如 system_r;
   如： chcon -R -t httpd_sys_content_t /www/  修改 Apache 的网页目录的安全类型
@@ -133,10 +133,10 @@ Example: logrotate has been configured to rotate files in `/backup/mysql`
 
   ```
   split -l 100 install.log -d -a 3 ins_log
-      -d 声明切割后的文件的前缀
-      -a 3  以数字作为后缀，以 3 位长度的数作为后缀（000）
-      -l 100 设置 100 行切割一个
-      ins_log 人为指定切割后文件的前缀
+      -d       声明切割后的文件的前缀
+      -a 3     以数字作为后缀，以 3 位长度的数作为后缀（000）
+      -l 100   设置 100 行切割一个
+      ins_log  人为指定切割后文件的前缀
   ```
 
 - 按大小切割
@@ -154,7 +154,7 @@ Example: logrotate has been configured to rotate files in `/backup/mysql`
 | /var/log/cron    | 定时任务相关日志                                             |
 | /var/log/cups/   | 打印信息                                                     |
 | /var/log/dmesg   | 开机内核自检信息，可用 dmesg 直接查看                        |
-| /var/log/btmp    | 错诶登录日志（lastb）                                        |
+| /var/log/btmp    | 错误登录日志（lastb）                                        |
 | /var/log/lastlog | 所有用户最后一次登录时间（lastlog）                          |
 | /var/log/message | 记录系统重要信息日志                                         |
 | /var/log/secure  | 验证和授权方面信息，如 ssh 登录，su，sudo,创建用户等操作     |

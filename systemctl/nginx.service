@@ -1,18 +1,21 @@
-NGINXDIR=/usr/local/nginx
 
-cat << EOF > /usr/lib/systemd/system/nginx.service 
+cat << EOF > /etc/systemd/system/nginx.service
 [Unit]
 Description=nginx - high performance web server
 Documentation=http://nginx.org/en/docs/
-After=network.target remote-fs.target nss-lookup.target
+After=network.target remote-fs.target nss-lookup.target 
 [Service]
 Type=forking
 User=nginx
 Group=nginx
-ExecStartPre=$NGINXDIR/sbin/nginx -t
-ExecStart=$NGINXDIR/sbin/nginx
-ExecReload=$NGINXDIR/sbin/nginx -s reload
-ExecStop=$NGINXDIR/sbin/nginx -s stop
+PIDFile=/usr/local/nginx/run/nginx.pid
+ExecStartPre=/usr/local/nginx/sbin/nginx -t
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s stop
+PrivateTmp=true
+Restart=on-failure
+RestartSec=5s
 [Install]
 WantedBy=multi-user.target
 EOF

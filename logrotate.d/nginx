@@ -2,8 +2,8 @@
 /usr/local/nginx/logs/error.log
 {
     daily
-    minsize 5K
-    maxsize 10M
+    minsize 10M
+    maxsize 1G
     missingok
     rotate 14
     compress
@@ -14,8 +14,8 @@
     create 0640 nginx nginx
     sharedscripts
     postrotate
-        if [ -f /usr/local/nginx/logs/nginx.pid ]; then
-              /usr/bin/kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+        if [ -f /usr/local/nginx/run/nginx.pid ]; then
+              /usr/bin/kill -SIGUSR1 `cat /usr/local/nginx/run/nginx.pid`
               /usr/bin/chmod 440 /usr/local/nginx/logs/*.log-*
         fi
     endscript

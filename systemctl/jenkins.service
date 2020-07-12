@@ -14,7 +14,7 @@ echo $! > $PidFile
 
 
 
-cat /usr/lib/systemd/system/jenkins.service 
+cat /etc/systemd/system/jenkins.service 
 [Unit]
 Description=jenkins.service 
 Documentation=jenkins.service 

@@ -1,3 +1,6 @@
+# 列出所有用户的 cron 定时任务任务
+    for user in $(cut -f1 -d: /etc/passwd); do echo $user; crontab -u $user -l 2>/dev/null; done
+
 # 查看是否插网线，1表示有，0表示无
     cat /sys/class/net/eth0/carrier
 
@@ -98,17 +101,17 @@ ls -l | awk '{k=0;s=0;for(i=0;i<=8;i++ ){k+=((substr($1,i+2,1)~/[rwxst]/)*2^(8-i
 
 
 # 查看系统开机时间
-    date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S" 
+    date -d "$(awk -F. '{print $1}' /proc/uptime) second ago" +"%Y-%m-%d %H:%M:%S"
 
 
 # 获取系统时间
-    date +%Y%m%d%H%M%S                  获取当天时间
-    echo `date +%Y-%m-%d\ %H:%M:%S`       获取当天年月日时分秒
-    echo `date +%Y%m%d`	              获取当天日期	
-    echo `date -d yesterday +%Y%m%d`      获取昨天日期	
-    echo `date -d -2day +%Y%m%d`          获取前两天的日期			
-    echo `date -d -3day +%Y%m%d`                获取前三天的日期
-    echo `date -d '-100 days' "+%Y-%m-%d"` 	    获取前100天	
+    date +%Y%m%d%H%M%S                      获取当天时间
+    echo `date +%Y-%m-%d\ %H:%M:%S`         获取当天年月日时分秒
+    echo `date +%Y%m%d`	                    获取当天日期	
+    echo `date -d yesterday +%Y%m%d`        获取昨天日期	
+    echo `date -d -2day +%Y%m%d`            获取前两天的日期			
+    echo `date -d -3day +%Y%m%d`            获取前三天的日期
+    echo `date -d '-100 days' "+%Y-%m-%d"` 	获取前100天	
 
 
 # 获取毫秒时间戳
@@ -140,7 +143,7 @@ ls -l | awk '{k=0;s=0;for(i=0;i<=8;i++ ){k+=((substr($1,i+2,1)~/[rwxst]/)*2^(8-i
     255            退出状态码越界
 
 # 查看网卡型号
-    yum -y install pciutils 
+    yum -y install pciutils
     lspci | grep -i ethernet
 
 # 添加新硬盘

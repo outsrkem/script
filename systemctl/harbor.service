@@ -5,7 +5,7 @@ cd $SHHOME
 /usr/sbin/docker-compose up -d
 
 
-cat << EOF > /usr/lib/systemd/system/harbor.service
+cat << EOF > /etc/systemd/system/harbor.service
 [Unit]
 Description=harbor service
 After=docker.target

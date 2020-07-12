@@ -1,8 +1,8 @@
-TOMCATDIR=/home/apache-tomcat-7.0.69
+ï»¿TOMCATDIR=/home/apache-tomcat-7.0.69
 JAVA_HOMEDIR=/home/jdk1.8.0_101
 JENKINS_HOME=/home/jenkins
 
-cat << EOF > /usr/lib/systemd/system/tomcat.service
+cat << EOF > /etc/systemd/system/tomcat.service
 [Unit]
 Description=tomcat
 After=syslog.target network.target remote-fs.target nss-lookup.target
@@ -19,9 +19,9 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
-Ê×ÏÈ£¬ĞèÒªÎªtomcatÅäÖÃpid¡£
+é¦–å…ˆï¼Œéœ€è¦ä¸ºtomcaté…ç½®pidã€‚
 vim bin/catalina.sh
 # Copy CATALINA_BASE from CATALINA_HOME if not already set
 [ -z "$CATALINA_BASE" ] && CATALINA_BASE="$CATALINA_HOME"
-# ÉèÖÃpid¡£Ò»¶¨Òª¼ÓÔÚCATALINA_BASE¶¨ÒåºóÃæ£¬Òª²»È»pid»áÉú³Éµ½/ÏÂÃæ
+# è®¾ç½®pidã€‚ä¸€å®šè¦åŠ åœ¨CATALINA_BASEå®šä¹‰åé¢ï¼Œè¦ä¸ç„¶pidä¼šç”Ÿæˆåˆ°æ ¹è·¯å¾„ä¸‹é¢
 CATALINA_PID="$CATALINA_BASE/tomcat.pid"

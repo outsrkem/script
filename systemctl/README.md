@@ -40,7 +40,7 @@ ExecReload=/usr/local/nginx/sbin/nginx -s reload
 ExecStop=/usr/local/nginx/sbin/nginx -s stop
 PrivateTmp=true
 Restart=on-failure
-RestartSec=2s
+RestartSec=5s
 [Install]
 WantedBy=multi-user.target
 ````
@@ -151,7 +151,7 @@ WantedBy=multi-user.target
      <tr>
          <td>User</td>
          <td>nginx</td>
-         <td>指定服务运行用户</td>
+         <td>指定服务运行用户，需注意服务目录的权限是否合理</td>
      </tr>
      <tr>
          <td>Group</td>
