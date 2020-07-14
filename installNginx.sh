@@ -59,3 +59,19 @@ RestartSec=5s
 [Install]
 WantedBy=multi-user.target
 EOF
+
+
+chcon system_u:object_r:httpd_unit_file_t:s0 /etc/systemd/system/nginx.service
+chcon system_u:object_r:bin_t:s0 /usr/local/nginx/sbin
+
+
+semanage fcontext -a -t httpd_config_t '/usr/local/nginx/conf(/.*)?'
+semanage fcontext -a -t httpd_var_run_t '/usr/local/nginx/run(/.*)?'
+semanage fcontext -a -t httpd_log_t '/usr/local/nginx/logs(/.*)?'
+semanage fcontext -a -t httpd_sys_content_t '/usr/local/nginx/html(/.*)?'
+semanage fcontext -a -t bin_t '/usr/local/nginx/sbin'
+semanage fcontext -a -t httpd_exec_t '/usr/local/nginx/sbin/nginx'
+
+restorecon -Frvv /usr/local/nginx/*
+
+

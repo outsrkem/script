@@ -68,7 +68,7 @@ logrotate -vf /etc/logrotate.conf
 /var/log/nginx(/.*)?          all files          system_u:object_r:httpd_log_t:s0
 ```
 
-我们可以直接将标签加到selinux的安全策略库中：
+我们可以直接将标签加到selinux的安全策略库中，这个定义将存储在`/etc/selinux/targeted/contexts/files/file_contexts.local`。
 
 ```
 # semanage fcontext -a -t httpd_log_t '/usr/local/nginx/logs(/.*)?'

@@ -1,3 +1,11 @@
+# 历史命令记录到messages日志文件中 >> vi /etc/profile
+    export PROMPT_COMMAND='{ msg=$(history 1|{ read x y; echo $y; });logger -t "[${SHELL}]" [`pwd`] "[$msg]" [code=`echo $?`] "[$(whoami)(uid=$(id -ur $user))]" [$(who am i)];}'
+
+# 获取当前目录名
+    echo $(basename `pwd`)
+    zcy=`pwd |awk -F '/' '{print $NF}'` && echo ${zcy:-'/'}
+
+
 # 列出所有用户的 cron 定时任务任务
     for user in $(cut -f1 -d: /etc/passwd); do echo $user; crontab -u $user -l 2>/dev/null; done
 
