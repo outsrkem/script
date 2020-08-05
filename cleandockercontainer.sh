@@ -4,8 +4,7 @@
 # 配合定时任务，实现秒级别的清理
 
 function clean(){
-    CONTAINERID=()
-    unset CONTAINERID
+    local CONTAINERID=()
 
     CONTAINERID[${#CONTAINERID[*]}]=`/usr/bin/docker ps -a |grep Exited |awk '{print $1}'`
 
