@@ -1,3 +1,36 @@
+# 定时任务常用写法
+    * * * * *       # 每分钟
+    */5 * * * *     # 每5分钟
+    0 17 * * 1-5    # 周一到周五每天 17:00
+    30 8 * * 1,3,5  # 每周一、三、五的 8 点 30 分
+    0 8-18/2 * * *  # 8 点到 18 点之间每隔 2 小时
+    0 0 */3 * *     # 每隔 3 天
+    0 */2 * * *     # 每两小时
+    @reboot         # Run once, at startup. 
+    @yearly         # Run once a year, "0 0 1 1 *". 
+    @annually       # (same as @yearly) 
+    @monthly        # Run once a month, "0 0 1 * *". 
+    @weekly         # Run once a week, "0 0 * * 0". 
+    @daily          # Run once a day, "0 0 * * *". 
+    @midnight       # (same as @daily) 
+    @hourly         # Run once an hour, "0 * * * *". /usr/local/www/awstats/cgi-bin/awstats.sh
+
+
+# bash 命令行的 url 中出现特殊字符的处理方式：
+    export http_proxy=http://zhangsan:123@zs!@172.16.2.17:8787
+    export https_proxy=http://zhangsan:@MingHou233!@172.16.2.17:8787
+    # 如果直接输入 BASH 会报错 或者代理无法使用。
+    # 解决办法就是将特殊字符转换成 ASIIC 码形式输入, 以 % + 十六进制(Hex)形式(0x忽略).
+    # 比如常见的会出现在密码中的特殊字符:
+    #  ~ : 0x7E,         ! : 0x21
+    #  @ : 0x40,         # : 0x23
+    #  $ : 0x24,         % : 0x25
+    #  ^ : 0x5E,         & : 0x26
+    #  * : 0x2A,         ? : 0x3F
+    # 替换后如下:
+    export HTTP_PROXY=http://zhangsan:123%40zs%21@172.16.2.17:8787
+    export HTTPS_PROXY=http://zhangsan:123%40zs%21@172.16.2.17:8787
+
 # 历史命令记录到messages日志文件中 >> vi /etc/profile
     export PROMPT_COMMAND='{ msg=$(history 1|{ read x y; echo $y; });logger -t "[${SHELL}]" [`pwd`] "[$msg]" [code=`echo $?`] "[$(whoami)(uid=$(id -ur $user))]" [$(who am i)];}'
 
@@ -27,7 +60,7 @@
     ps -eo pid,lstart,etime,cmd | grep nginx
 
 # open files值修改
-cat >> /etc/security/limits.conf <<EOF
+cat << EOF>> /etc/security/limits.conf
 * soft nofile 65535
 * hard nofile 65535
 EOF
@@ -123,10 +156,11 @@ ls -l | awk '{k=0;s=0;for(i=0;i<=8;i++ ){k+=((substr($1,i+2,1)~/[rwxst]/)*2^(8-i
 
 
 # 获取毫秒时间戳
-    current=`date "+%Y-%m-%d %H:%M:%S"`
-    timeStamp=`date -d "$current" +%s`
-    currentTimeStamp=$((timeStamp*1000+`date "+%N"`/1000000))
-    echo $currentTimeStamp
+    # 秒，毫秒，微秒，纳秒
+    # 使用 date +%s%N 可以获得一个纳秒级的unix时间戳(当前时间)，然后根据需要截取一部分即可得到毫秒级的精度
+    # 如下即为毫秒级时间戳
+    echo $[$(date +%s%N)/1000000]
+
 # 定义PS1变量
     NORMAL="\[\e[0m\]"
     RED="\[\e[1;31m\]"
