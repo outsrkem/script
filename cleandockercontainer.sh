@@ -6,7 +6,7 @@
 function clean(){
     local CONTAINERID=()
 
-    CONTAINERID[${#CONTAINERID[*]}]=`/usr/bin/docker ps -a |grep Exited |awk '{print $1}'`
+    CONTAINERID[${#CONTAINERID[*]}]=`/usr/bin/docker ps -f status=exited -q`
 
     if [ -n "${CONTAINERID[*]}" ];then
         for element in ${CONTAINERID[@]};do
