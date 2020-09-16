@@ -1,4 +1,4 @@
-﻿function history_log {
+function history_log {
     local  result=$?
     local  result_str=""
     if [ ${result} -eq 0 ];then
