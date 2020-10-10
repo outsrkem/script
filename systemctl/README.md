@@ -181,7 +181,7 @@ WantedBy=multi-user.target
      <tr>
          <td>ExecStop</td>
          <td>命令</td>
-         <td>服务停止明林</td>
+         <td>服务停止命令</td>
      </tr>         
      <tr>
          <td>PrivateTmp</td>

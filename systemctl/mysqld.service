@@ -1,0 +1,16 @@
+﻿# mysqld start script 
+# /etc/systemd/system/mysqld.service
+#
+#
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+[Service]
+Environment="CONF=/usr/local/mysql/my.cnf"
+ExecStart=/usr/local/mysql/bin/mysqld_safe --defaults-file=${CONF}
+LimitNOFILE = 5000
+[Install]
+WantedBy=multi-user.target
