@@ -1,17 +1,18 @@
-#!/bin/bash
-# harborÆô¶¯½Å±¾·ÅÔÚ/root/harbor/Ä¿Â¼ÏÂ
-SHHOME=$(cd `dirname $0`; pwd)
-cd $SHHOME
-/usr/sbin/docker-compose up -d
+ï»¿# /etc/systemd/system/harbor.service
+# systemctl start nginx.service
+#
 
-
-cat << EOF > /etc/systemd/system/harbor.service
 [Unit]
-Description=harbor service
-After=docker.target
+Description=Harbor
+After=docker.service systemd-networkd.service systemd-resolved.service
+Requires=docker.service
+Documentation=http://github.com/vmware/harbor
 [Service]
-Type=forking
-ExecStart=/root/harbor/start.sh
+Type=simple
+Restart=on-failure
+RestartSec=5
+Environment="CONF=/home/harbor/docker-compose.yml"
+ExecStart=/usr/local/bin/docker-compose -f ${CONF} up
+ExecStop=/usr/local/bin/docker-compose -f ${CONF} down
 [Install]
 WantedBy=multi-user.target
-EOF
