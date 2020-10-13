@@ -1,5 +1,6 @@
 ﻿# /etc/systemd/system/harbor.service
-# systemctl start nginx.service
+# systemctl start harbor.service
+# systemctl enable harbor.service
 #
 
 [Unit]

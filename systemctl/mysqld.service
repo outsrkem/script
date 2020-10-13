@@ -1,6 +1,7 @@
 ﻿# mysqld start script 
 # /etc/systemd/system/mysqld.service
-#
+# systemctl start mysqld.service
+# systemctl enable mysqld.service
 
 [Unit]
 Description=MySQL Database Server
@@ -14,6 +15,6 @@ User=mysql
 Group=mysql
 Environment="CONF=/usr/local/mysql/my.cnf"
 ExecStart=/usr/local/mysql/bin/mysqld_safe --defaults-file=${CONF}
-LimitNOFILE = 5000
+LimitNOFILE=5000
 [Install]
 WantedBy=multi-user.target
