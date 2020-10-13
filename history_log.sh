@@ -1,3 +1,6 @@
+#
+# 将脚本放置在 /etc/profile.d/ 即可
+#
 function history_log {
     local  result=$?
     local  result_str=""
