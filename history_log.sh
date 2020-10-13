@@ -15,7 +15,8 @@ function history_log {
     local  login=$(who -m | awk '{print $2" "$NF}')
     local  msg=$(history 1 | { read x y; echo "$y"; })
     local  num=$(history 1 | { read x y; echo "$x"; })
-    local  base_dir=$(basename `pwd`)
+    local  base_dir=$(pwd) # 显示绝对路径
+    # local  base_dir=$(basename `pwd`) 只显示当前目录名
     if [ "${num}" != "${LastComandNum}" ] && [ "${LastComandNum}" != "" -o "${num}" == "1" ];then
         logger -t "[${SHELL}]" "[${base_dir}]" "[${msg}]" "${result_str}" "[${user}(uid=$user_id) from $login]"
     fi
