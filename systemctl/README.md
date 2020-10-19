@@ -161,7 +161,7 @@ WantedBy=multi-user.target
      <tr>
          <td>PIDFile</td>
          <td>pid文件绝对路径</td>
-         <td>指定服务运行的pid文件</td>
+         <td>指定服务运行的pid文件，可以使用变量 $MAINPID 获取</td>
      </tr>
      <tr>
          <td>ExecStartPre</td>
