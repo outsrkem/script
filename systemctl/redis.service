@@ -1,0 +1,16 @@
+# redis.service
+# /etc/systemd/system/redis.service
+[Unit]
+Description=redis
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/redis.pid
+ExecStart=/usr/local/redis/src/redis-server /usr/local/redis/etc/redis.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
