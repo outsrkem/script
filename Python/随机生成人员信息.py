@@ -6,8 +6,7 @@
 #
 import sys, time
 import random
-import pymysql
-import threading
+
 
 '''
 PyMySQL==0.9.3
@@ -170,11 +169,22 @@ def PersonalInfo():
     return info
 
 
-PersolInfo = PersonalInfo()
-print(PersolInfo)
+import json
+
+PersolInfoDict = PersolInfo = PersonalInfo()
+PersolInfoJson = json.dumps(PersolInfo, ensure_ascii=False)
+
+print(type(PersolInfoDict))
+print(PersolInfoDict)
+
+print(type(PersolInfoJson))
+print(PersolInfoJson)
 
 
 '''
+import pymysql
+import threading
+
 dblink = pymysql.connect(
     host="10.10.10.1",
     user="jianyong",
