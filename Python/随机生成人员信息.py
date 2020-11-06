@@ -172,7 +172,11 @@ def PersonalInfo():
 import json
 
 PersolInfoDict = PersolInfo = PersonalInfo()
-PersolInfoJson = json.dumps(PersolInfo, ensure_ascii=False)
+# sort_keys是告诉编码器按照字典key排序(a到z)输出。
+# indent参数根据数据格式缩进显示，读起来更加清晰, indent的值，代表缩进空格式
+# separators参数的作用是去掉‘，’ ‘：’后面的空格，在传输数据的过程中，越精简越好，冗余的东西全部去掉。
+PersolInfoJson = json.dumps(PersolInfo, ensure_ascii=False,sort_keys=True,indent=4,separators=(',',':'))
+
 
 print(type(PersolInfoDict))
 print(PersolInfoDict)
