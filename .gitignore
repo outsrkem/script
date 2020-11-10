@@ -1,0 +1,14 @@
+# Specify filepatterns you want git to ignore.
+# Byte-compiled / optimized / DLL files
+__pycache__
+__pycache__/*
+*/__pycache__
+.idea
+.idea/
+.idea/*
+*.pyc
+git-updata.bat
+static/blognote-data.sql
+static/install.sql
+*.log*
+
