@@ -12,7 +12,13 @@ prifile = open('private.pem','wb')
 prifile.write(pri)
 prifile.close()
 
-# 读取公钥和密钥文件
+# 读取公钥和密钥文件，密码长度与证书长度位数有关系。
+# 加密的 plaintext 最大长度是 证书key位数/8 - 11, 
+# 例如1024 bit的证书，被加密的串最长 1024/8 - 11=117,
+# 那么对于 2048bit的证书，被加密的长度最长2048/8 - 11 =245,解决办法是分块加密，然后分块解密就行了，
+# 因为 证书key固定的情况下，加密出来的串长度是固定的。
+# 也就是说，如果使用2048bit的证书，并且被加密的字符段是小于245个，那么被加密出来的字符长度是344个，
+# 以此类推，被加密的字符串可以是688个，1032个等
 with open('public.pem') as publickfile:
   p = publickfile.read()
   pubkey = rsa.PublicKey.load_pkcs1(p)
