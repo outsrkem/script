@@ -167,9 +167,11 @@ ip route add 10.10.10.222 dev lo:0  # 将目标ip为VIP的报文转交给lo:0处
 
 - 永久配置
 
+> 虚拟IP地址配置
+
 
 ```shell
-cat /etc/sysconfig/network-scripts/ifcfg-lo:0
+vim /etc/sysconfig/network-scripts/ifcfg-lo:0
 DEVICE=lo:0
 IPADDR=10.10.10.222
 NETMASK=255.255.255.255
@@ -181,12 +183,27 @@ ONBOOT=yes
 NAME=loopback
 ```
 
-  - 查看路由
+> 路由配置
 
 ```shell
-cat /etc/sysconfig/network-scripts/route-lo:0
+vim /etc/sysconfig/network-scripts/route-lo:0
 10.10.10.222 dev lo:0
 ```
 
+#### 3. 关闭arp响应级别
 
+```bash
+# 临时配置
+echo "1" >/proc/sys/net/ipv4/conf/lo/arp_ignore
+echo "2" >/proc/sys/net/ipv4/conf/lo/arp_announce
+echo "1" >/proc/sys/net/ipv4/conf/all/arp_ignore
+echo "2" >/proc/sys/net/ipv4/conf/all/arp_announce
+
+# 永久配置
+# /etc/sysctl.conf 
+net.ipv4.conf.lo.arp_ignore= 1
+net.ipv4.conf.lo.arp_announce= 2
+net.ipv4.conf.all.arp_ignore= 1
+net.ipv4.conf.all.arp_announce= 2
+```
 
