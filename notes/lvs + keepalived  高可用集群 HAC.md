@@ -30,14 +30,14 @@ sysctl -a |grep "net.ipv4.ip_forward"
 ```shell
 ! Configuration File for keepalived
 global_defs {
-   router_id lvs-01             #router_id 机器标识
+   router_id lvs-01             # router_id 机器标识
 }
 vrrp_instance VI_1 {            # vrrp实例定义部分
     state BACKUP                # 置lvs的状态，MASTER和BACKUP两种，必须大写 
     interface ens33             # 设置对外服务的接口
     virtual_router_id 100       # 设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
     priority 90                 # 定义优先级，主服务器优先级高
-	# nopreempt             # 表示设置为不抢夺VIP# state MASTER 需修改为 state BACKUP 
+    # nopreempt                 # 表示设置为不抢夺VIP# state MASTER 需修改为 state BACKUP 
     advert_int 1                # 设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
     authentication {            # 设置验证类型和密码
         auth_type PASS          # 主要有PASS和AH两种
@@ -48,7 +48,7 @@ vrrp_instance VI_1 {            # vrrp实例定义部分
     }
 }
 
-#设置虚拟服务器，需要指定虚拟ip和服务端口(lvs 端口必须要和后端服务相同)
+# 设置虚拟服务器，需要指定虚拟ip和服务端口(lvs 端口必须要和后端服务相同)
 virtual_server 10.10.10.222 80 {     # 集群端口和后端端口必须一致
     delay_loop 6                     # 健康检查时间间隔
     lb_algo rr                       # 负载均衡调度算法
