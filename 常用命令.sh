@@ -1,3 +1,6 @@
+# 将套接字监听为tcp或udp端口
+socat -d -d TCP-LISTEN:8080,fork UNIX:/var/run/nginx.sock
+
 # 正则匹配Centos命令提示符：
     \[[a-zA-Z0-9]+@[a-zA-Z0-9-_]+\s(~|[a-zA-Z0-9-./+_]+)\](#|\$)
 
