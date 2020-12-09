@@ -51,7 +51,7 @@ ssh-keygen -s ../ca/server_ca -I xiexianbin -n root -V +52w id_rsa.pub
 > - -I：识别证书的名称，相当于注释。 当证书用于认证时，它用于日志记录
 > - -n：识别与此证书关联的名称（用户或主机），表示证书仅对该域名有效。如果有多个，则使用逗号分隔。上例中只有root用户能够登录到目标服务器。
 > - -V：指定证书的有效期为。 在这种情况下，我们指定证书将在一年（52周）过期，默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过 52 周。
-> - -O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。
+> - -O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。如： -O source-address=10.10.10.11,10.10.10.12
 
 生成证书以后，可以使用下面的命令，查看证书的细节。
 
@@ -60,20 +60,23 @@ ssh-keygen -L -f id_rsa-cert.pub
 # 大概如下
 id_rsa-cert.pub:
         Type: ssh-rsa-cert-v01@openssh.com user certificate
-        Public key: RSA-CERT SHA256:+x7fuCdDu8PBdefb3So5OyLqbOlMJdFxIOy4bqh+Ic8
+        Public key: RSA-CERT SHA256:HP71SBszAWUOgg1uOjkZCEkoeEaNgWU3eF9oCV0bctc
         Signing CA: RSA SHA256:PpwLGScb0WQLDar94WyOD5DKkdTjzJohQS76wNRJQQg
-        Key ID: "xiexianbin"  # 此处则是 -I 指定的值
+        Key ID: "xiexianbin" # 此处则是 -I 指定的值
         Serial: 0
-        Valid: from 2020-12-09T21:38:00 to 2021-12-08T21:39:09
-        Principals: 
-                root  # 此处则是 -n 指定的值
-        Critical Options: (none)
+        Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27
+        Principals: # 此处则是 -n 指定的值
+                root
+                devlop
+        Critical Options:  # 此处则是 -O 指定的值
+                source-address 10.10.10.11,10.10.10.12
         Extensions: 
                 permit-X11-forwarding
                 permit-agent-forwarding
                 permit-port-forwarding
                 permit-pty
                 permit-user-rc
+               
 ```
 
 
