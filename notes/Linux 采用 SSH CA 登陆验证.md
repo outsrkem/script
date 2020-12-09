@@ -42,7 +42,7 @@ ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert
 
 ```shell
 cd rsa
-ssh-keygen -s ../ca/server_ca -I xiexianbin -n root -V +52w id_rsa.pub
+ssh-keygen -s ../ca/server_ca -I xiexianbin  -O source-address=10.10.10.11,10.10.10.12 -n root,develop -V +52w id_rsa.pub
 ```
 
 >  说明：
