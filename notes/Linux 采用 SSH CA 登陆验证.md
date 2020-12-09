@@ -67,7 +67,7 @@ id_rsa-cert.pub:
         Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27
         Principals: # 此处则是 -n 指定的值
                 root
-                devlop
+                develop
         Critical Options:  # 此处则是 -O 指定的值
                 source-address 10.10.10.11,10.10.10.12
         Extensions: 
