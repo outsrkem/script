@@ -21,6 +21,7 @@ make && make install
 --prefix=/usr/local/nginx \
 --pid-path=/usr/local/nginx/run/nginx.pid \
 --with-http_stub_status_module \
+--with-http_gzip_static_module \
 --with-http_ssl_module \
 --with-http_v2_module \
 --with-openssl=/root/openssl-1.0.2h  #指定该软件位置，且软件版本高于 1.0.1
@@ -28,6 +29,7 @@ make && make install
 
 # 开启4层代理
 # 编译需要添加 --with-stream模块
+# --with-http_stub_status_module 开启静态资源 .gz 格式的压缩文件
 # 启用file aio支持（一种APL文件传输格式）
 ./configure --prefix=/usr/local/nginx \
 --user=nginx \
