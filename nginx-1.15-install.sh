@@ -36,6 +36,7 @@ make && make install
 --group=nginx \
 --pid-path=/usr/local/nginx/run/nginx.pid \
 --with-http_ssl_module \
+--with-http_gunzip_module \
 --with-http_stub_status_module \
 --with-file-aio \
 --with-stream
