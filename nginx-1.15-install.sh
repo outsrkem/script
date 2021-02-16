@@ -21,6 +21,7 @@ make && make install
 --prefix=/usr/local/nginx \
 --pid-path=/usr/local/nginx/run/nginx.pid \
 --with-http_stub_status_module \
+--with-http_gunzip_module \
 --with-http_gzip_static_module \
 --with-http_ssl_module \
 --with-http_v2_module \
@@ -30,6 +31,7 @@ make && make install
 # 开启4层代理
 # 编译需要添加 --with-stream模块
 # --with-http_stub_status_module 开启静态资源 .gz 格式的压缩文件
+# --with-http_gunzip_module 压缩模块网站的静态文件在互联网站传输会很大
 # 启用file aio支持（一种APL文件传输格式）
 ./configure --prefix=/usr/local/nginx \
 --user=nginx \
