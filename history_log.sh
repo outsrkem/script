@@ -1,7 +1,6 @@
-#
 # 将脚本放置在 /etc/profile.d/ 即可
-#
-function _history_log {
+# 2019-04-22 Fri 18:08:09 CST
+function __history_log {
     local  result=$?
     local  result_str=""
     if [ ${result} -eq 0 ];then
@@ -37,5 +36,5 @@ function variable_readonly {
 
 export HISTCONTROL='' >/dev/null 2>&1
 variable_readonly HISTTIMEFORMAT "" >/dev/null 2>&1
-variable_readonly PROMPT_COMMAND _history_log >/dev/null 2>&1
+variable_readonly PROMPT_COMMAND __history_log >/dev/null 2>&1
 
