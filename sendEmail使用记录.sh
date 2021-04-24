@@ -56,5 +56,13 @@ xp b35f9f00d32 -m "我是邮件内容"
 
 
 
+smtp='smtp.126.com'
+smtp_auth_user='xhdascnf@126.com'
+smtp_auth_password='HKFKVIQTMAWGGBVD'
+from='xhdascnf@126.com'
+to='981789763@qq.com'
+title="博客数据备份"
+body=`cat /tmp/.mailbody`
+
 
 
