@@ -15,8 +15,7 @@
     sharedscripts
     postrotate
         if [ -f /usr/local/nginx/run/nginx.pid ]; then
-              /usr/bin/kill -SIGUSR1 `cat /usr/local/nginx/run/nginx.pid`
-              /usr/bin/chmod 440 /usr/local/nginx/logs/*.log-*
+            /usr/bin/kill -SIGUSR1 `cat /usr/local/nginx/run/nginx.pid 2>/dev/null` 2>/dev/null || true
         fi
     endscript
 }
