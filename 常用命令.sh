@@ -1,5 +1,12 @@
+# 2019-07-02
+# 生成随机密码
+    for _ in {1..30};do tr -dc '~`!@#$%^&*()_+-={}:"<>?[];,./A-Za-z0-9"'"'" </dev/urandom |head -c 25;echo ;done |grep ^[a-zA-Z0-9]
+
+    for _ in {1..30};do tr -dc '(!@&%^-_=+[{}]:,./?~#*)A-Za-z0-9' </dev/urandom |head -c 25;echo ;done |grep -P \
+    "^[a-zA-Z0-9](?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\!@&%\^\-_=\+\[{}\]:,\./\?~#\*]).{20,30}$"
+
 # 将套接字监听为tcp或udp端口
-socat -d -d TCP-LISTEN:8080,fork UNIX:/var/run/nginx.sock
+    socat -d -d TCP-LISTEN:8080,fork UNIX:/var/run/nginx.sock
 
 # 正则匹配Centos命令提示符：
     \[[a-zA-Z0-9]+@[a-zA-Z0-9-_]+\s(~|[a-zA-Z0-9-./+_]+)\](#|\$)
@@ -72,7 +79,7 @@ cat << EOF>> /etc/security/limits.conf
 EOF
 
 # Linux之awk实现ls显示数值权限
-ls -l | awk '{k=0;s=0;for(i=0;i<=8;i++ ){k+=((substr($1,i+2,1)~/[rwxst]/)*2^(8-i))}j=4;for(i=4;i<=10;i+=3){s+=((substr($1,i,1)~/[stST]/)*j);j/=2}if(k){printf("%0o%0o ",s,k)}print}'
+    ls -l | awk '{k=0;s=0;for(i=0;i<=8;i++ ){k+=((substr($1,i+2,1)~/[rwxst]/)*2^(8-i))}j=4;for(i=4;i<=10;i+=3){s+=((substr($1,i,1)~/[stST]/)*j);j/=2}if(k){printf("%0o%0o ",s,k)}print}'
 
 # 系统负载查看（ps命名）
     ## 内存占比统计
