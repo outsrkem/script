@@ -46,7 +46,7 @@ ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert
 
 ## 用刚才的ca给客户端SSH公钥进行签名
 
-生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。
+生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。签名时需要使用ca的私钥。
 
 ```shell
 cd rsa
