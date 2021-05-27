@@ -2,18 +2,17 @@
 # systemctl start harbor.service
 # systemctl enable harbor.service
 #
-
 [Unit]
-Description=Harbor
-After=docker.service systemd-networkd.service systemd-resolved.service
+Description=Docker Compose Application Service
 Requires=docker.service
+After=docker.service systemd-networkd.service systemd-resolved.service
 Documentation=http://github.com/vmware/harbor
 [Service]
-Type=simple
-Restart=on-failure
-RestartSec=5
-Environment="CONF=/home/harbor/docker-compose.yml"
-ExecStart=/usr/local/bin/docker-compose -f ${CONF} up
-ExecStop=/usr/local/bin/docker-compose -f ${CONF} down
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/home/harbor
+ExecStart=/usr/local/bin/docker-compose up -d
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
 [Install]
 WantedBy=multi-user.target
