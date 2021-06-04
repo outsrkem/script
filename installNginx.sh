@@ -4,20 +4,29 @@
 SHHOME=$(cd `dirname $0`; pwd)
 
 function log_error() {
-    echo -e "\033[31m [ERROR] \033[0m $@ "
+    echo -e "\033[31m[ERROR] \033[0m $@ "
 }
 function log_info() {
-    echo -e "\033[32m [INFO] \033[0m $@ "
+    echo -e "\033[32m[INFO] \033[0m $@ "
 }
 function log_warn() {
-    echo -e "\033[33m [WRIN] \033[0m $@ "
+    echo -e "\033[33m[WRIN] \033[0m $@ "
 }
 
-useradd -r -s /sbin/nologin nginx
-yum -y install gcc* pcre pcre-devel perl perl-devel openssl openssl-devel zlib-devel
+if [ -z "$1" ];then
+  log_error '请指定nginx源码包'
+  echo $0 nginx-1.20.1.tar.gz
+  exit 100
+fi
 
-tar xvf nginx-1.17.5.tar.gz
-cd nginx-1.17.5
+
+useradd -r -s /sbin/nologin nginx
+yum -y install gcc* pcre pcre-devel perl perl-devel openssl openssl-devel zlib-devel policycoreutils-python
+
+tar xvf $1
+cd nginx-*
+
+
 ./configure --user=nginx --group=nginx \
 --prefix=/usr/local/nginx \
 --pid-path=/usr/local/nginx/run/nginx.pid \
