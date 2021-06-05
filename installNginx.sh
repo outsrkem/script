@@ -19,12 +19,13 @@ if [ -z "$1" ];then
   exit 100
 fi
 
+nginx_name=$1
 
 useradd -r -s /sbin/nologin nginx
 yum -y install gcc* pcre pcre-devel perl perl-devel openssl openssl-devel zlib-devel policycoreutils-python
 
-tar xvf $1
-cd nginx-*
+tar xvf $nginx_name
+cd ${nginx_name%%.tar.gz*}
 
 
 ./configure --user=nginx --group=nginx \
@@ -32,7 +33,7 @@ cd nginx-*
 --pid-path=/usr/local/nginx/run/nginx.pid \
 --with-http_stub_status_module \
 --with-http_ssl_module 
-make && make install
+make -j && make install
 
 find . -type d -name vim -exec cp -a {} ~/.vim \;
 
@@ -64,7 +65,7 @@ ExecReload=/usr/local/nginx/sbin/nginx -s reload
 ExecStop=/usr/local/nginx/sbin/nginx -s stop
 PrivateTmp=true
 Restart=on-failure
-RestartSec=5s
+RestartSec=2s
 [Install]
 WantedBy=multi-user.target
 EOF
