@@ -40,6 +40,7 @@ cd ${nginx_name%%.tar.gz*}
 --with-http_stub_status_module \
 --with-http_gunzip_module \
 --with-file-aio \
+--with-http_v2_module \
 --with-openssl=../openssl-1.1.1k
 
 make -j && make install
