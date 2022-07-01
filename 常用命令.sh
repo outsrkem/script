@@ -19,14 +19,14 @@
     0 8-18/2 * * *  # 8 点到 18 点之间每隔 2 小时
     0 0 */3 * *     # 每隔 3 天
     0 */2 * * *     # 每两小时
-    @reboot         # Run once, at startup. 
-    @yearly         # Run once a year, "0 0 1 1 *". 
-    @annually       # (same as @yearly) 
-    @monthly        # Run once a month, "0 0 1 * *". 
-    @weekly         # Run once a week, "0 0 * * 0". 
-    @daily          # Run once a day, "0 0 * * *". 
-    @midnight       # (same as @daily) 
-    @hourly         # Run once an hour, "0 * * * *". /usr/local/www/awstats/cgi-bin/awstats.sh
+    @reboot#        # Run once,at startup.
+    @yearly         # Run once a year, "0 0 1 1 *".
+    @annually       # (same as @yearly)
+    @monthly        # Run once a month, "0 0 1 * *".
+    @weekly         # Run once a week, "0 0 * * 0".
+    @daily          # Run once a day, "0 0 * * *".
+    @midnight       # (same as @daily)
+    @hourly         # Run once an hour, "0 * * * *". /usr/local/www/awstats/cgi-bin/awstats.sh
 
 
 # bash 命令行的 url 中出现特殊字符的处理方式：

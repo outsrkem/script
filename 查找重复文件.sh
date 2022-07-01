@@ -3,7 +3,7 @@
 # Delete duplicated files in one directory recursively
 # 查找重复文件
 # https://blog.csdn.net/qingruoshui/article/details/12947633
-# 如果需要对找到的文件进行其他操作请自行替换 tar -c "$longNameFileWithPath" | tar x -C "$targetDirectory" 这一句。
+# 如果需要对找到的文件进行其他操作请自行替换 tar -c "$longNameFileWithPath" | tar x -C "$targetDirectory" 这一句。
 
  
 function ergodicFolder(){
