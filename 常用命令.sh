@@ -1,4 +1,10 @@
 # 2019-07-02
+
+
+# fuser命令用户
+    fuser -um /dev/sda2 # 查看哪些进程使用到/dev/sda2设备
+    fuser -km /home     # 杀死所有访问 /home 文件系统的进程，可用于umount失败是使用
+
 # 生成随机密码
     for _ in {1..30};do tr -dc '~`!@#$%^&*()_+-={}:"<>?[];,./A-Za-z0-9"'"'" </dev/urandom |head -c 25;echo ;done |grep ^[a-zA-Z0-9]
 
