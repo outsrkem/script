@@ -25,7 +25,7 @@ for file in os.listdir(path):
         b = name.strip("mmexport").strip(".jpg")[10:13]
         timeArray = time.localtime(int(a))
         otherStyleTime = time.strftime("%Y%m%d_%H%M%S", timeArray)
-        new_name = "IMG_" + otherStyleTime + "." + b + "." + name.split(".")[1]
+        new_name = "IMG_" + otherStyleTime + "." + b + "." + name.split(".")[-1]
         name_list.append([file, new_name])
 
 if __name__ == '__main__':
