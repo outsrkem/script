@@ -11,4 +11,8 @@ git-updata.bat
 static/blognote-data.sql
 static/install.sql
 *.log*
-
+*/.idea
+*/.idea/
+*/.idea/*
+*/venv
+venv
