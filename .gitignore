@@ -17,3 +17,5 @@ static/install.sql
 */venv
 venv
 objective
+test
+test/*
