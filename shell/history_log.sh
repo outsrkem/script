@@ -1,4 +1,4 @@
-# 将脚本放置在 /etc/profile.d/ 即可
+# Place the script in /etc/profile.d/
 # 2019-04-22 Fri 18:08:09 CST
 function __history_log {
     local  result=$?
@@ -14,8 +14,8 @@ function __history_log {
     local  login=$(who -m | awk '{print $2" "$NF}')
     local  msg=$(history 1 | { read x y; echo "$y"; })
     local  num=$(history 1 | { read x y; echo "$x"; })
-    local  base_dir=$(pwd) # 显示绝对路径
-    # local  base_dir=$(basename `pwd`) 只显示当前目录名
+    local  base_dir=$(pwd) # Show absolute path
+    # local  base_dir=$(basename `pwd`) Only the current directory name is displayed
     if [ "${num}" != "${LastComandNum}" ] && [ "${LastComandNum}" != "" -o "${num}" == "1" ];then
         logger -t "[${SHELL}]" "[${base_dir}]" "[${msg}]" "${result_str}" "[${user}(uid=$user_id)]" "[$login]"
     fi
