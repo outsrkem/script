@@ -1,5 +1,5 @@
 #!/bin/bash
-# 2019‎年‎10‎月‎8‎日
+# 2019年10月8日
 # Delete duplicated files in one directory recursively
 # 查找重复文件
 # https://blog.csdn.net/qingruoshui/article/details/12947633

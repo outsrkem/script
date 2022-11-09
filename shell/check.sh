@@ -9,7 +9,7 @@
 ##############################################################
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 source /etc/profile
-[ $(id -u) -gt 0 ] && echo "请用root用户执行此脚本！" && exit 1
+[ $(id -u) -gt 0 ] && echo "请用root用户执行此脚本!" && exit 1
 #uploadHostDailyCheckApi="http://10.0.0.1:8080/api/uploadHostDailyCheck"
 #uploadHostDailyCheckReportApi="http://10.0.0.1:8080/api/uploadHostDailyCheckReport"
 centosVersion=$(awk '{print $(NF-1)}' /etc/redhat-release)

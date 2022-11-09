@@ -1,5 +1,5 @@
 #!/bin/bash
-# ‎2019‎年6‎月12‎日
+# 2019年6月12日
 >~/ip.log
 read -p "Please enter the section you want to scan:" network
 [[ "$network" =~ ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$ ]] || { echo "Please input alegal IP"; exit 50; }

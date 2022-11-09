@@ -1,5 +1,5 @@
 #!/bin/bash
-# 2019‎年‎8‎月‎6‎日
+# 2019年8月6日
 #
 PROCNAME=infoweb
 SHHOME=$(cd `dirname $0`; pwd)

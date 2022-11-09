@@ -1,5 +1,5 @@
 #!/bin/bash
-# 2019‎年‎4‎月‎5‎日
+# 2019年4月5日
 TX1=/tmp/tcp.txt
 #Date1=$(date '+%Y-%m  %d_%H:%M')
 Date1=$(date +%Y-%m-%d_%H:%M:%S)
