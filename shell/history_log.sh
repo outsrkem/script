@@ -11,9 +11,9 @@ function __history_log {
     history -a
     local  user=$(whoami)
     local  user_id=$(id -ur $user)
-    local  login=$(who -m | awk '{print $2" "$NF}')
-    local  msg=$(history 1 | { read x y; echo "$y"; })
-    local  num=$(history 1 | { read x y; echo "$x"; })
+    local  login=$(who -m 2>/dev/null |awk '{print $2" "$NF}')
+    local  msg=$(history 1 |{ read x y; echo "$y"; })
+    local  num=$(history 1 |{ read x y; echo "$x"; })
     local  base_dir=$(pwd) # Show absolute path
     # local  base_dir=$(basename `pwd`) Only the current directory name is displayed
     if [ "${num}" != "${LastComandNum}" ] && [ "${LastComandNum}" != "" -o "${num}" == "1" ];then
@@ -25,7 +25,7 @@ function __history_log {
 function variable_readonly {
     local  var="$1"
     local  val="$2"
-    local  ret=$(readonly -p | grep -w "${var}" | awk -F "${var}=" '{print $NF}')
+    local  ret=$(readonly -p |grep -w "${var}" |awk -F "${var}=" '{print $NF}')
     if [ "${ret}" = "\"${val}\"" ];then
         return
     else
