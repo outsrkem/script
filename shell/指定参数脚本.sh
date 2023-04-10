@@ -29,7 +29,7 @@ parse_arguments() {
       --version=*) version="$val" ;;
       --file=*) file="$val" ;;
       --home=*) home="$val" ;;
-      --help) usage ;;
+      --help|-h) usage ;;
       *) shell_quote_string "$arg" ;;
     esac
   done
