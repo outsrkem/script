@@ -166,12 +166,12 @@ EOF
 
 # 获取系统时间
     date +%Y%m%d%H%M%S                      获取当天时间
-    echo `date +%Y-%m-%d\ %H:%M:%S`         获取当天年月日时分秒
-    echo `date +%Y%m%d`	                    获取当天日期	
-    echo `date -d yesterday +%Y%m%d`        获取昨天日期	
-    echo `date -d -2day +%Y%m%d`            获取前两天的日期			
+    echo `date "+%Y-%m-%d %H:%M:%S"`        获取当天年月日时分秒
+    echo `date +%Y%m%d`                     获取当天日期
+    echo `date -d yesterday +%Y%m%d`        获取昨天日期
+    echo `date -d -2day +%Y%m%d`            获取前两天的日期
     echo `date -d -3day +%Y%m%d`            获取前三天的日期
-    echo `date -d '-100 days' "+%Y-%m-%d"` 	获取前100天	
+    echo `date -d '-100 days' "+%Y-%m-%d"`  获取前100天
 
 
 # 获取毫秒时间戳
