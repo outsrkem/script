@@ -185,15 +185,15 @@ print(type(PersolInfoJson))
 print(PersolInfoJson)
 
 
-'''
+
 import pymysql
 import threading
 
 dblink = pymysql.connect(
-    host="10.10.10.1",
-    user="jianyong",
-    password="jianyong",
-    database="test",
+    host="127.0.0.1",
+    user="root",
+    password="123456",
+    database="db1",
     charset="utf8")
 
 
@@ -205,7 +205,7 @@ dblink = pymysql.connect(
 # 插入数据
 def install(db):
     cursor = db.cursor()
-    sql = "insert `test`.`userinfo` (name,email,age,sex,birthday,idnumber,phone) values( %s,%s,%s,%s,%s,%s,%s )"
+    sql = "insert `db1`.`userinfo` (name,email,age,sex,birthday,idnumber,phone) values( %s,%s,%s,%s,%s,%s,%s )"
     lock.acquire()  # 获取锁
     try:
         PerInfo = PersonalInfo()
@@ -233,4 +233,3 @@ if __name__ == '__main__':
     # 等待至线程中止
     for thr in threads:
         thr.join()
-'''
