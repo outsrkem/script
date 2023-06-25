@@ -178,12 +178,12 @@ PersolInfoDict = PersolInfo = PersonalInfo()
 PersolInfoJson = json.dumps(PersolInfo, ensure_ascii=False,sort_keys=True,indent=4,separators=(',',':'))
 
 
-print(type(PersolInfoDict))
-print(PersolInfoDict)
-
-print(type(PersolInfoJson))
-print(PersolInfoJson)
-
+# print(type(PersolInfoDict))
+# print(PersolInfoDict)
+#
+# print(type(PersolInfoJson))
+# print(PersolInfoJson)
+#
 
 
 import pymysql
@@ -205,7 +205,7 @@ dblink = pymysql.connect(
 # 插入数据
 def install(db):
     cursor = db.cursor()
-    sql = "insert `db1`.`userinfo` (name,email,age,sex,birthday,idnumber,phone) values( %s,%s,%s,%s,%s,%s,%s )"
+    sql = "INSERT `userinfo` (name,email,age,sex,birthday,idnumber,phone) VALUES ( %s,%s,%s,%s,%s,%s,%s )"
     lock.acquire()  # 获取锁
     try:
         PerInfo = PersonalInfo()
@@ -222,7 +222,7 @@ lock = threading.RLock()  # 创建锁
 threads = []
 if __name__ == '__main__':
     # target=执行的函数，args=传给函数的值，range代表打开几个线程执行，变量i传给函数执行的函数的形参
-    for i in range(500):
+    for i in range(2):
         t = threading.Thread(target=install, args=(dblink,))
         threads.append(t)
 
