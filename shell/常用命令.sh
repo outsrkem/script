@@ -1,5 +1,10 @@
 # 2019-07-02
 
+# 生成一大堆固定大小的文件，用于测试磁盘，网速等
+# bs=每次写入指定目标时块的大小，单位是字节
+# count=所写入的块的个数
+# 文件大小为 bs * count
+seq -w 120 |xargs -i dd if=/dev/zero bs=4096 count=1 of=/root/{}.dat
 
 # fuser命令用户
     fuser -um /dev/sda2 # 查看哪些进程使用到/dev/sda2设备
