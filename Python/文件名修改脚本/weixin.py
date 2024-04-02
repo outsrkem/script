@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# Python 3.7.9
 # 微信保存的图片名批量修改
 # 在脚本的上级目录新建objective目录： ../objective
 # 把图片放在 ../objective 目录中，运行脚本即可
@@ -32,7 +32,12 @@ if __name__ == '__main__':
     in_content = "N"
     for i in name_list:
         print(i)
-    in_content = input("Confirm whether to change the name [y/Y/N, default N]: ")
+    try:
+        """兼容Python 2和Python 3的input代码"""
+        in_content = raw_input("Confirm whether to change the name [y/Y/N, default N]: ")
+    except NameError:
+        in_content = input("Confirm whether to change the name [y/Y/N, default N]: ")
+
     if in_content == "Y" or in_content == "y":
         for i in name_list:
             old_name = os.path.join(path, i[0])
