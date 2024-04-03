@@ -7,9 +7,9 @@ BASE_DIR = os.path.abspath(os.curdir)
 picture_path = os.path.join(BASE_DIR, "..", "objective")
 
 
-def picture_rename(path, file_prefix, file_format='.jpg'):
+def picture_rename(path, file_prefix, file_format):
     """
-    原始名称：XHS_1630060700785b5ac650a-5583-319d-a433-3f5fdb4f339b.jpg
+    原始名称：_storage_emulated_0_Android_data_com.huawei.smarthome_files_iotplugin_ScreenShots_12884956430_2023_07_29_08_57_29_091.jpeg
     Args:
         path: 照片的路径
         file_prefix: 待去除的文件名称时间戳前面的一部分
@@ -20,19 +20,24 @@ def picture_rename(path, file_prefix, file_format='.jpg'):
     for file in os.listdir(path):
         if os.path.isfile(os.path.join(path, file)):
             name = str(file)
-            # 取秒时间戳
-            a = name.strip(file_prefix).strip(file_format)[0:10]
+            # 获取时间：20230729085729091
+            f_time = name.replace(file_prefix, '').replace(file_format, '').replace('_', '')
+            # 取年月日：20230729
+            a = f_time[0:8]
+            # 取时间
+            b = f_time[8:14]
             # 取毫秒
-            b = name.strip(file_prefix).strip(file_format)[10:13]
-            time_array = time.localtime(int(a))
-            other_style_time = time.strftime("%Y%m%d_%H%M%S", time_array)
-            new_name = "IMG_" + other_style_time + "." + b + "." + name.split(".")[1]
+            c = f_time[14:17]
+            # 最终名称：IMG_20230729085729.091.jpeg
+            new_name = "IMG_%s_%s.%s%s" % (a, b, c, file_format)
             file_name_list.append([file, new_name])
     return file_name_list
 
 
 if __name__ == '__main__':
-    name_list = picture_rename(picture_path, 'XHS_', '.jpg')
+    name_list = picture_rename(picture_path,
+                               '_storage_emulated_0_Android_data_com.huawei.smarthome_files_iotplugin_ScreenShots_12884956430_',
+                               '.jpeg')
     for item in name_list:
         print(item)
 
