@@ -1,5 +1,14 @@
 # 2019-07-02
 
+# 使用exec命令启动一个服务
+    # 创建一个脚本
+    # 可以选择记录日志或者不记录，修改“>/dev/null”即可
+cat << 'EOF' > run.sh
+#!/bin/bash
+exec /opt/frps/frps -c /opt/frps/frps.toml >/dev/null 2>&1 &
+EOF
+
+
 # 生成一大堆固定大小的文件，用于测试磁盘，网速等
 # bs=每次写入指定目标时块的大小，单位是字节
 # count=所写入的块的个数
