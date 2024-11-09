@@ -1,0 +1,15 @@
+version: '3'
+services:
+   mysqld:
+     image: mysql:5.7.44
+     restart: always
+     container_name: mysqld
+     ports:
+       - "0.0.0.0:3306:3306/tcp"
+     volumes:
+       - /etc/localtime:/etc/localtime:ro
+       - /usr/share/zoneinfo/iso3166.tab:/usr/share/zoneinfo/iso3166.tab:ro
+       - /opt/mysqld/conf:/etc/mysql/mysql.conf.d
+     environment:
+       MYSQL_ROOT_PASSWORD: "root@pwd"
+       TZ: "Asia/Shanghai"
