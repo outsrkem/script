@@ -15,4 +15,5 @@ binlog_format         = ROW
 max_binlog_size       = 100M
 expire_logs_days      = 0
 server_id             = 11
+innodb_file_per_table = 1
 explicit_defaults_for_timestamp = true

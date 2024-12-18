@@ -23,6 +23,7 @@ binlog_format         = ROW
 max_binlog_size       = 100M
 expire_logs_days      = 0
 server_id             = 11
+innodb_file_per_table = 1
 explicit_defaults_for_timestamp = true
 EOF
 ```
@@ -80,20 +81,20 @@ docker pull mysql:5.7.44
   default-character-set=utf8
   user=root
   password=123456
-
+  
   [mysqld]
   #skip-grant-tables
   port = 3306
   basedir="D:\data\mysqld"
   datadir="D:\data\mysqld\data"
-
+  
   max_connections=200
   character-set-server=utf8
   default-storage-engine=INNODB
-
+  
   log-error="D:\data\mysqld\error.log"
   tls_version   = 'TLSv1.2'
-
+  
   sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER
   symbolic-links        = 0
   default-time-zone     = '+8:00'
@@ -105,6 +106,7 @@ docker pull mysql:5.7.44
   max_binlog_size       = 100M
   expire_logs_days      = 0
   server_id             = 11
+  innodb_file_per_table = 1
   explicit_defaults_for_timestamp = true
   ```
 
