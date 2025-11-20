@@ -1,5 +1,14 @@
 # 2019-07-02
 
+# 使用nsenter命令进入各种命名空间
+docker inspect -f {{.State.Pid}} {{容器名称或ID}}
+nsenter -t PID -n
+
+
+# 类似于 curl 的功能
+wget -O - -q www.baidu.com
+
+
 # 使用exec命令启动一个服务
     # 创建一个脚本
     # 可以选择记录日志或者不记录，修改“>/dev/null”即可
