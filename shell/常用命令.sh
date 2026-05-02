@@ -1,5 +1,9 @@
 # 2019-07-02
 
+# git 同时推送多个仓库
+git remote set-url --add origin git@github.com:xxxx/xxxx.git
+
+
 # 使用nsenter命令进入各种命名空间
 docker inspect -f {{.State.Pid}} {{容器名称或ID}}
 nsenter -t PID -n
